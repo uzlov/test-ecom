@@ -51,8 +51,9 @@ jobs:
       # run build!
       - run: yarn build
 
-      commands:
-        - aws s3 sync --acl public-read --sse --delete dist/ s3://app-staging.e-commerce.cx
+      - deploy:
+        commands:
+          - aws s3 sync --acl public-read --sse --delete dist/ s3://app-staging.e-commerce.cx
 
 workflows:
   version: 2
