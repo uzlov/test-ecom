@@ -57,8 +57,6 @@ jobs:
           key: v1-dependencies-dist
 
   deploy:
-    docker:
-      - image: circleci/awscli:1.11.36
     working_directory: ~/repo
     steps:
       - checkout
