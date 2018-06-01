@@ -58,7 +58,7 @@ jobs:
 
   deploy:
     docker:
-      - image: my-awscli-image:1.0
+      - image: circleci/node:8.11.2
     working_directory: ~/repo
     steps:
       - checkout
@@ -67,14 +67,6 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-dist
-
-      - run:
-          name: install aws-cli
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y python-pip python-dev
-            sudo pip install awscli
-            aws --version
 
       - run:
           name: Deploy Master to AWS
