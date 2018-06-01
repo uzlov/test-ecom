@@ -53,8 +53,8 @@ jobs:
 
       - run:
           name: Deploy Master to AWS
-          commands:
-            - aws s3 sync --acl public-read --sse --delete dist/ s3://app-staging.e-commerce.cx
+          command: |
+            aws s3 sync --acl public-read --sse --delete dist/ s3://app-staging.e-commerce.cx
 
 workflows:
   version: 2
