@@ -57,6 +57,8 @@ jobs:
           key: v1-dependencies-dist
 
   deploy:
+    machine:
+      enabled: true
     working_directory: ~/repo
     steps:
       - checkout
