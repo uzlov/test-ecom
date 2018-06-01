@@ -32,16 +32,16 @@ jobs:
     steps:
       - checkout
       # Restore cache of dependencies.
-#      - restore_cache:
-#          keys:
-#          - v1-dependencies-{{ checksum "package.json" }}
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
       # Run build!
       - run: yarn build
-
-#      - save_cache:
-#          paths:
-#            - dist
-#          key: v1-dependencies-dist
+      # Cache of "dist" folder, which contains files, which we built.
+      - save_cache:
+          paths:
+            - dist
+          key: v1-dist-{{ .Environment.CIRCLE_SHA1 }}
 
   deploy:
     machine:
@@ -50,9 +50,9 @@ jobs:
     steps:
       - checkout
       # Restore folder "dist", which we built in previous task.
-#      - restore_cache:
-#          keys:
-#          - v1-dependencies-dist
+      - restore_cache:
+          keys:
+          - v1-dist-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Deploy to AWS S3
           command: |
