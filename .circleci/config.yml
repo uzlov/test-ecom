@@ -51,7 +51,8 @@ jobs:
       # run build!
       - run: yarn build
 
-      - deploy:
+      - run:
+          name: Deploy Master to AWS
           commands:
             - aws s3 sync --acl public-read --sse --delete dist/ s3://app-staging.e-commerce.cx
 
